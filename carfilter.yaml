@@ -16,7 +16,7 @@ spec:
         image: manuexcd/carfilter
         resources:
           requests:
-            cpu: "0.01"
+            cpu: "0.3"
           limits:
             cpu: "0.4"
         env:
