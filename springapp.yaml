@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapp
+spec:
+  #replicas: 3
+  selector:
+    matchLabels:
+      app: springapp
+  template:
+    metadata:
+      labels:
+        app: springapp
+    spec:
+      containers:
+      - name: dockerplugin
+        image: manuexcd/springapp
+        resources:
+          requests:
+            cpu: "0.1"
+          limits:
+            cpu: "0.2"
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: container
+        ports:
+        - containerPort: 8085
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: springapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: springapp
+  ports:
+    - port: 8085
+      targetPort: 8085
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: springapp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: springapp
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 50

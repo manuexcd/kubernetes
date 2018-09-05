@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carfilter
+spec:
+  selector:
+    matchLabels:
+      app: carfilter
+  template:
+    metadata:
+      labels:
+        app: carfilter
+    spec:
+      containers:
+      - name: carfilter
+        image: manuexcd/carfilter
+        resources:
+          requests:
+            cpu: "0.01"
+          limits:
+            cpu: "0.4"
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: kubernetes
+        ports:
+        - containerPort: 8086
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: carfilter
+spec:
+  type: NodePort
+  selector:
+    app: carfilter
+  ports:
+    - port: 8086
+      targetPort: 8086

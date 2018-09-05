@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms2
+  #namespace: spring-cloud
+  labels:
+    name: ms2
+spec:
+  #replicas: 3
+  selector:
+    matchLabels:
+      app: ms2
+  template:
+    metadata:
+      labels:
+        app: ms2
+    spec:
+      containers:
+      - name: ms2
+        image: manuexcd/ms2
+        resources:
+          requests:
+            cpu: "0.1"
+        ports:
+        - containerPort: 8084
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ms2
+  #namespace: spring-cloud
+spec:
+  type: LoadBalancer
+  selector:
+    app: gateway
+  ports:
+    - port: 8084
+      targetPort: 8084

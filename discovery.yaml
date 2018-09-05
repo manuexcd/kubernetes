@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery
+  labels:
+    name: discovery
+spec:
+  selector:
+    matchLabels:
+      app: discovery
+  template:
+    metadata:
+      labels:
+        app: discovery
+    spec:
+      containers:
+      - name: discovery
+        image: manuexcd/spring-cloud-discovery
+        resources:
+          requests:
+            cpu: "0.01"
+          limits:
+            cpu: "0.4"
+        ports:
+        - containerPort: 8082
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: kubernetes
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: eureka-server
+spec:
+  type: LoadBalancer
+  selector:
+    app: discovery
+  ports:
+    - port: 8082
+      targetPort: 8082
