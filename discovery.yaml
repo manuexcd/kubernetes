@@ -18,7 +18,7 @@ spec:
         image: manuexcd/spring-cloud-discovery
         resources:
           requests:
-            cpu: "0.3"
+            cpu: "0.1"
           limits:
             cpu: "0.4"
         ports:
