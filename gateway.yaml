@@ -36,5 +36,5 @@ spec:
   selector:
     app: gateway
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
