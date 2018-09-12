@@ -36,5 +36,5 @@ spec:
   selector:
     app: discovery
   ports:
-    - port: 80
+    - port: 8082
       targetPort: 8082

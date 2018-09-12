@@ -32,5 +32,5 @@ spec:
   selector:
     app: jenkins
   ports:
-    - port: 8088
+    - port: 80
       targetPort: 8088
