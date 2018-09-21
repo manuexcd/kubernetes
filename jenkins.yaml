@@ -28,7 +28,7 @@ spec:
       volumes:
           - name: jenkins-home
             hostPath:
-              path: /jenkings-config
+              path: /jenkins-config
               type: Directory
 ---
 kind: Service
