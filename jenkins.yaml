@@ -27,10 +27,6 @@ spec:
             name: jenkins-home
       volumes:
           - name: jenkins-home
-            gcePersistentDisk:
-              pdName: jenkins-home
-              fsType: ext4
-              partition: 1
 ---
 kind: Service
 apiVersion: v1
