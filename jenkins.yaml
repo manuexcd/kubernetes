@@ -29,7 +29,6 @@ spec:
           - name: jenkins-home
             hostPath:
               path: /home/manuexcd/jenkins-config
-              type: Directory
 ---
 kind: Service
 apiVersion: v1
