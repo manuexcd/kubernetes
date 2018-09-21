@@ -32,11 +32,11 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: root
         - name: MYSQL_DATABASE
-          value: docker
+          value: tfg
         - name: MYSQL_USER
-          value: docker
+          value: manuexcd
         - name: MYSQL_PASSWORD
-          value: docker
+          value: contrasena
         ports:
         - containerPort: 3306
           name: mysql
